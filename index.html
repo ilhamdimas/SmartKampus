@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login Smart Campus</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row vh-100 justify-content-center align-items-center">
+            <div class="col-md-4">
+                <div class="card shadow-lg p-4 login-box">
+                    <h2 class="text-center mb-4">SMART CAMPUS</h2>
+                    <form method="POST">
+                        <div class="mb-3">
+                            <label>Username</label>
+                            <input type="text" name="username" class="form-control">
+                        </div>
+                        <div class="mb-3">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control">
+                        </div>
+                        <button class="btn btn-primary w-100" name="login">LOGIN</button>
+                    </form>
+
+                    <?php
+                    include "koneksi.php";
+                    if(isset($_POST['login'])){
+                        $u = $_POST['username'];
+                        $u = $_POST['password'];
+
+                        $query = mysqli_query($conn,
+                        "SELECT *FROM users
+                        WHERE username='$u'
+                        AND password='$p'
+                        ");
+
+                        $cek = mysqli_num_rows($query);
+                    if  ($cek > 0) 
+                    {
+                        $_SESSION['login'] = true;
+                        header("Location : dashboard.php");
+                    }              
+                    else
+                    {
+                        echo  "
+                        <div class='alert alert-danger mt-3'>Login Gagal</div>
+                        ";
+                    }
+                }
+                ?>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
