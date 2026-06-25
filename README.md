@@ -1,0 +1,2 @@
+# SmartKampus
+gacor
